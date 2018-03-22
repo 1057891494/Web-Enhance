@@ -1,5 +1,5 @@
 ;
-(function() {
+(function () {
   var calendarInputs = document.querySelectorAll(".calendar");
   if (calendarInputs.length > 0) {
     var monthList = ['壹月', '贰月', '叁月', '肆月', '伍月', '陆月', '柒月', '捌月', '玖月', '拾月', '拾壹月', '拾贰月'];
@@ -31,7 +31,7 @@
 
     function edit() {
       //输入框聚焦时进入编辑模式
-      if (this.value && /^\d{4}\/\d{2}\/\d{2}$/.test(this.value)) {
+      if (this.value && (/^\d{4}\/\d{2}\/\d{2}$/.test(this.value) || /^\d{8}$/.test(this.value))) {
         this.value = this.value.split('/').join("");
       } else {
         this.value = "";
@@ -95,6 +95,7 @@
         calendarWindow.appendChild(content);
         setDate(toyear, tomonth, content, this.previousSibling);
       }
+      //this.previousSibling.focus();
     }
 
     function calDays(year, month) {
@@ -135,22 +136,22 @@
       //绑定方法
       var optionItems = document.querySelectorAll('.optionItem');
       for (var i = 0, len = optionItems.length; i < len; i++) {
-        optionItems[i].addEventListener('click', function() {
+        optionItems[i].addEventListener('click', function () {
           target.value = year + '/' + ('0' + (month - -1)).replace(/^0?(\d{2})$/, '$1') + '/' + ('0' + this.innerText).replace(/^0?(\d{2})$/, '$1');
-          doCancel(target.nextSibling);
+          doCancel();
         });
       }
-      document.querySelector('.left').addEventListener('click', function() {
+      document.querySelector('.left').addEventListener('click', function () {
         year = month - 1 < 0 ? year - 1 : year;
         month = month - 1 < 0 ? 11 : month - 1;
         setDate(year, month, element, target);
       });
-      document.querySelector('.right').addEventListener('click', function() {
+      document.querySelector('.right').addEventListener('click', function () {
         year = month - -1 > 11 ? year - -1 : year;
         month = month - -1 > 11 ? 0 : month - -1;
         setDate(year, month, element, target);
       });
-      document.querySelector('.timer').addEventListener('click', function() {
+      document.querySelector('.timer').addEventListener('click', function () {
         setMonth(year, element, target);
       });
     }
@@ -167,19 +168,19 @@
       //绑定方法
       var optionItems = document.querySelectorAll('.monthItem');
       for (var i = 0, len = optionItems.length; i < len; i++) {
-        optionItems[i].addEventListener('click', function() {
+        optionItems[i].addEventListener('click', function () {
           setDate(year, this.attributes.val.value, element, target);
         });
       }
-      document.querySelector('.left').addEventListener('click', function() {
+      document.querySelector('.left').addEventListener('click', function () {
         year = year - 1;
         setMonth(year, element, target);
       });
-      document.querySelector('.right').addEventListener('click', function() {
+      document.querySelector('.right').addEventListener('click', function () {
         year = year - -1;
         setMonth(year, element, target);
       });
-      document.querySelector('.timer').addEventListener('click', function() {
+      document.querySelector('.timer').addEventListener('click', function () {
         setYear(year, element, target);
       });
     }
@@ -196,15 +197,15 @@
       //绑定方法
       var optionItems = document.querySelectorAll('.yearItem');
       for (var i = 1, len = optionItems.length - 1; i < len; i++) {
-        optionItems[i].addEventListener('click', function() {
+        optionItems[i].addEventListener('click', function () {
           setMonth(this.attributes.val.value, element, target);
         });
       }
-      document.querySelector('.left').addEventListener('click', function() {
+      document.querySelector('.left').addEventListener('click', function () {
         year = year - 10;
         setYear(year, element, target);
       });
-      document.querySelector('.right').addEventListener('click', function() {
+      document.querySelector('.right').addEventListener('click', function () {
         year = year - -10;
         setYear(year, element, target);
       });
@@ -219,6 +220,18 @@
       calendarImg.addEventListener('click', clickCalendar);
       calendarInputs[i].addEventListener('focus', edit);
       calendarInputs[i].addEventListener('blur', format);
+      if (i == 0) {
+        document.querySelector('body').addEventListener('click', function (e) {
+          var clickTarget = e.target || window.event.target;
+          while (clickTarget.parentNode) {
+            if (clickTarget.className.indexOf('calendarWindow') != -1 || clickTarget.className.indexOf('calendarImg') != -1) {
+              return;
+            }
+            clickTarget = clickTarget.parentNode;
+          }
+          doCancel();
+        });
+      }
       var parent = calendarInputs[i].parentNode;
       if (parent.lastChild == calendarInputs[i]) {
         parent.appendChild(calendarImg);

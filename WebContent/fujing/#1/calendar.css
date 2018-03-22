@@ -9,6 +9,7 @@
     position: absolute;
 }
 .calendarWindow{
+    background-color: #fff;
     width: 252px;
     box-shadow: -3px 15px 15px rgba(0,0,0,0.5);
     padding: 7px;
