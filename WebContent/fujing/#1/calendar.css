@@ -10,7 +10,7 @@
 }
 .calendarWindow{
     background-color: #fff;
-    width: 252px;
+    width: 265px;
     box-shadow: -3px 15px 15px rgba(0,0,0,0.5);
     padding: 7px;
     border: solid #bfbfbf 1px;
@@ -61,7 +61,7 @@
 }
 .calendarWindow>div>.leader>.timer{
     display: inline-block;
-    width: 154px;
+    width: 167px;
     vertical-align: top;
     height: 100%;
     line-height: 30px;
@@ -73,8 +73,8 @@
     height: calc(100% - 30px);
     padding: 0 15px 8px 15px;
 }.calendarWindow>div>.main>div{
-    width: 29px;
-    height: 29px;
+    width: 31px;
+    height: 31px;
     display: inline-block;
     text-align: center;
     line-height: 29px;
@@ -94,9 +94,15 @@
     color: #fff;
     background-color: #8b94f7;
 }
+.calendarWindow>div>.main>div.optionItem.hourItem{
+    width: 54px;
+}
+.calendarWindow>div>.main>div.optionItem.minuteItem{
+    width: 36px;
+}
 .calendarWindow>div>.main>div.optionItem.monthItem,
 .calendarWindow>div>.main>div.optionItem.yearItem{
-    width: 68px;
+    width: 72px;
 }
 .calendarWindow>div>.main>div.optionItem.yearItem:first-child,
 .calendarWindow>div>.main>div.optionItem.yearItem:last-child{
