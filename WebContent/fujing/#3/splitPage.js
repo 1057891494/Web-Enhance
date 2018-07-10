@@ -23,6 +23,7 @@
         });
         Lists[i].addEventListener('touchmove', function(e) {
           e = e || window.event;
+          //获取当前触点位置
           var nowY;
           if (e.targetTouches.length > 0) {
             nowY = e.targetTouches[0].clientY;
@@ -31,19 +32,18 @@
           } else if (e.touches.length > 0) {
             nowY = e.touches[0].clientY;
           }
+          //获取拥有滚动条的dom
+          if (Lists[i].scrollTop) {
+            scrollTarget = List[i];
+          } else if (document.body.scrollTop) {
+            scrollTarget = document.body;
+          } else if (document.documentElement.scrollTop) {
+            scrollTarget = document.documentElement;
+          }
           if (nowY - startY > 0) {
             //往下滑，刷新
             if (nowY - startY > SCROLL_TOP) {
-              if (Lists[i].scrollTop) {
-                Lists[i].style.overflow = 'hidden';
-                scrollTarget = List[i];
-              } else if (document.body.scrollTop) {
-                document.body.style.overflow = 'hidden';
-                scrollTarget = document.body;
-              } else if (document.documentElement.scrollTop) {
-                document.documentElement.style.overflow = 'hidden';
-                scrollTarget = document.documentElement;
-              }
+              scrollTarget.style.overflow = 'hidden';
               //滑倒顶了，则刷新
               Lists[i].style.transform = 'translateY(' + (nowY - startY - SCROLL_TOP) + 'px)';
               document.querySelector('.reload').style.transform = 'rotate(' + (nowY - startY - SCROLL_TOP) * 2 + 'deg)';
@@ -54,13 +54,6 @@
               }
             }
           } else {
-            if (Lists[i].scrollTop) {
-              scrollTarget = List[i];
-            } else if (document.body.scrollTop) {
-              scrollTarget = document.body;
-            } else if (document.documentElement.scrollTop) {
-              scrollTarget = document.documentElement;
-            }
             if (!scrollTarget) {
               //如果一进来就一次滑到低刷新，此时scrollTarget为undefinded,return 重新获取scrollTarget dom对象
               return;
