@@ -1,0 +1,100 @@
+.domTree,
+.domTree ul {
+  list-style: none;
+  overflow: hidden;
+  transition: height .4s;
+}
+
+.domTree {}
+
+.folder {
+  line-height: 20px;
+  vertical-align: top;
+}
+
+.folder>ul>.folder {
+  /*text-indent: 16px;*/
+  padding-left: 16px;
+}
+
+.file {
+  line-height: 20px;
+}
+
+.folder>ul>.file {
+  /*text-indent: 16px;*/
+  padding-left: 16px;
+}
+
+.folder>p>.tree-hit {
+  background-image: url(tree_icons.png);
+  background-repeat: no-repeat;
+  background-size: auto;
+  width: 16px;
+  height: 20px;
+  display: inline-block;
+  vertical-align: top;
+  background-position-x: 0px;
+}
+
+.folder>p>.tree-icon {
+  background-image: url(tree_icons.png);
+  background-repeat: no-repeat;
+  background-size: auto;
+  width: 16px;
+  height: 20px;
+  display: inline-block;
+  vertical-align: top;
+  background-position-x: -208px;
+}
+
+.file>p>.tree-hit {
+  width: 16px;
+  height: 20px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.file>p>.tree-icon {
+  background-image: url(tree_icons.png);
+  background-repeat: no-repeat;
+  background-size: auto;
+  width: 16px;
+  height: 20px;
+  display: inline-block;
+  vertical-align: top;
+  background-position-x: -240px;
+}
+
+.folder>p>.tree-hit.isopen {
+  background-position-x: -16px;
+}
+
+.folder>p>.tree-hit.notopen {
+  background-position-x: 0px;
+}
+
+.folder>p>.tree-hit.notopen:hover {
+  background-position-x: -32px;
+}
+
+.folder>p>.tree-hit.isopen:hover {
+  background-position-x: -48px;
+}
+
+.folder>p>.tree-hit.isopen+.tree-icon {
+  background-position-x: -224px;
+}
+
+.folder>p>.tree-hit.notopen+.tree-icon {
+  background-position-x: -208px;
+}
+
+.domTree p:hover {
+  background-color: #e7e7e7;
+  cursor: pointer;
+}
+
+.domTree p.selected {
+  background-color: #ffefbc;
+}
